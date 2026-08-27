@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" styleClass="pokedex-root-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.edu.nintendo.pokemon.esmeralda.controller.auth.LoginController">
+    <stylesheets>
+        <URL value="@/main/resources/css/auth/login-view.css" />
+    </stylesheets>
+    
+    <children>
+        <Pane mouseTransparent="true" prefHeight="160.0" prefWidth="160.0" styleClass="emerald-orb-1" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0" />
+        <Pane mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" styleClass="emerald-orb-2" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="50.0" />
+
+        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="15.0" />
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="70.0" />
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="15.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="10.0" vgrow="ALWAYS" />
+                <RowConstraints percentHeight="80.0" vgrow="ALWAYS" />
+                <RowConstraints percentHeight="10.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <VBox alignment="CENTER" maxHeight="Infinity" maxWidth="Infinity" spacing="12.0" styleClass="pokedex-container" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <!-- Logotipo o icono de Entrenador / Pokéball -->
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="image-trainer-icon">
+                            <image>
+                                <Image url="@../../assets/pokeball.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets bottom="6.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        
+                        <!-- Label de error necesario para el controlador -->
+                        <Label fx:id="lblErrorMessage" managed="false" visible="false" styleClass="error-message-label" textFill="#ff3333" wrapText="true" textAlignment="CENTER" />
+                        
+                        <Label styleClass="pokedex-field-label" text="ID de Entrenador (Correo)" />
+                        <TextField fx:id="txtEmail" maxWidth="280.0" prefWidth="280.0" promptText="entrenador@hoenn.com" styleClass="pokedex-text-field" />
+                        
+                        <Label styleClass="pokedex-field-label" text="Contraseña Secreta" />
+                        <PasswordField fx:id="txtPassword" maxWidth="280.0" prefWidth="280.0" promptText="••••••••" styleClass="pokedex-text-field" />
+                        
+                        <Button maxWidth="280.0" mnemonicParsing="false" onAction="#handleLogin" prefWidth="280.0" styleClass="hoenn-button" text="¡Comenzar Aventura!">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Button>
+                        
+                        <Hyperlink fx:id="linkLogin" onAction="#handleRegisterView" styleClass="hoenn-link" text="¿Nuevo Entrenador? Regístrate aquí" underline="true">
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Hyperlink>
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>
