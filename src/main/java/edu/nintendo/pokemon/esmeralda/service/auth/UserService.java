@@ -37,14 +37,28 @@ public class UserService {
         if (registerRequest == null) {
             return new RegisterResponse(false, "La petición no puede ser nula.");
         }
+        
+        // Validar campos vacíos o nulos
         if (registerRequest.getNickname() == null || registerRequest.getNickname().trim().isEmpty()
                 || registerRequest.getEmail() == null || registerRequest.getEmail().trim().isEmpty()
                 || registerRequest.getPasswrd() == null || registerRequest.getPasswrd().trim().isEmpty()) {
             return new RegisterResponse(false, "Todos los campos son obligatorios.");
         }
+        
+        // Validar que no contengan espacios
+        if (registerRequest.getNickname().contains(" ")) {
+            return new RegisterResponse(false, "El nickname no puede contener espacios.");
+        }
+        if (registerRequest.getEmail().contains(" ")) {
+            return new RegisterResponse(false, "El correo electrónico no puede contener espacios.");
+        }
+
+        // Validar formato básico de correo
         if (!registerRequest.getEmail().contains("@") || !registerRequest.getEmail().contains(".")) {
             return new RegisterResponse(false, "El formato del correo electrónico no es válido.");
         }
+        
+        // Validar longitud de la contraseña
         if (registerRequest.getPasswrd().length() < 8) {
             return new RegisterResponse(false, "La contraseña debe tener al menos 8 caracteres.");
         }
