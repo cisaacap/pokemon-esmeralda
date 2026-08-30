@@ -1,4 +1,4 @@
-package main.java.nintendo.pokemon.esmeralda.dto.response.pokemon;
+package main.java.edu.nintendo.pokemon.esmeralda.dto.response.pokemon;
 
 public class PokemonResponse {
 

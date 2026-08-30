@@ -4,17 +4,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import main.java.edu.nintendo.pokemon.esmeralda.config.ConnectionDB;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.request.auth.LoginRequest;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.request.auth.RegisterRequest;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.response.auth.LoginResponse;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.response.auth.RegisterResponse;
+import main.java.edu.nintendo.pokemon.esmeralda.dto.response.pokemon.UserPokemonResponse;
 
 public class UserRepository {
 
     private Connection conn = ConnectionDB.getConnection();
 
     public UserRepository() {
+    }
+
+    public List<UserPokemonResponse> findUserPokemonsByNickname(String nickname) {
+        List<UserPokemonResponse> pokemons = new ArrayList<>();
+        String sql = "SELECT p.id_pokemon, p.nombre_pokemon, up.mote, p.primary_type, p.second_type, up.health "
+                + "FROM Usuario_Pokemon up "
+                + "INNER JOIN Pokemon p ON up.id_pokemon = p.id_pokemon "
+                + "WHERE up.nickname = ?";
+
+        try (PreparedStatement pstm = conn.prepareStatement(sql)) {
+            pstm.setString(1, nickname);
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    pokemons.add(new UserPokemonResponse(
+                            rs.getInt("id_pokemon"),
+                            rs.getString("nombre_pokemon"),
+                            rs.getString("mote"),
+                            rs.getString("primary_type"),
+                            rs.getString("second_type"),
+                            rs.getDouble("health")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error obteniendo equipo Pokémon: " + e.getMessage());
+        }
+        return pokemons;
     }
 
     public LoginResponse findUserByNickName(LoginRequest loginRequest) throws Exception {

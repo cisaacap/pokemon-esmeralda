@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.java.edu.nintendo.pokemon.esmeralda.config.ConnectionDB;
-import main.java.nintendo.pokemon.esmeralda.dto.request.pokemon.PokemonRequest;
-import main.java.nintendo.pokemon.esmeralda.dto.response.pokemon.PokemonResponse;
+import main.java.edu.nintendo.pokemon.esmeralda.dto.request.pokemon.PokemonRequest;
+import main.java.edu.nintendo.pokemon.esmeralda.dto.response.pokemon.PokemonResponse;
 
 public class PokemonRepository {
 
@@ -21,7 +21,7 @@ public class PokemonRepository {
 
     public PokemonResponse savePokemonUser(PokemonRequest pokemonRequest) throws Exception {
         String sql = "INSERT INTO Usuario_Pokemon (nickname, id_pokemon, mote, health) VALUES (?, ?, ?, ?)";
-        
+
         // Indicamos que queremos recuperar las claves generadas (id_pokemon_usuario)
         try (PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstm.setString(1, pokemonRequest.getNickname());
@@ -36,11 +36,11 @@ public class PokemonRepository {
                     if (generatedKeys.next()) {
                         int idPokemonUsuario = generatedKeys.getInt(1);
                         return new PokemonResponse(
-                            idPokemonUsuario,
-                            pokemonRequest.getNickname(),
-                            pokemonRequest.getIdPokemon(),
-                            pokemonRequest.getMote(),
-                            pokemonRequest.getHealth()
+                                idPokemonUsuario,
+                                pokemonRequest.getNickname(),
+                                pokemonRequest.getIdPokemon(),
+                                pokemonRequest.getMote(),
+                                pokemonRequest.getHealth()
                         );
                     }
                 }
@@ -50,21 +50,21 @@ public class PokemonRepository {
         }
         return null;
     }
-    
+
     public List<PokemonResponse> findPokemonsByNickname(String nickname) throws Exception {
         List<PokemonResponse> pokemons = new ArrayList<>();
         String sql = "SELECT id_pokemon_usuario, nickname, id_pokemon, mote, health FROM Usuario_Pokemon WHERE nickname = ?";
-        
+
         try (PreparedStatement pstm = conn.prepareStatement(sql)) {
             pstm.setString(1, nickname);
             try (ResultSet rs = pstm.executeQuery()) {
                 while (rs.next()) {
                     PokemonResponse pokemon = new PokemonResponse(
-                        rs.getInt("id_pokemon_usuario"),
-                        rs.getString("nickname"),
-                        rs.getInt("id_pokemon"),
-                        rs.getString("mote"),
-                        rs.getDouble("health")
+                            rs.getInt("id_pokemon_usuario"),
+                            rs.getString("nickname"),
+                            rs.getInt("id_pokemon"),
+                            rs.getString("mote"),
+                            rs.getDouble("health")
                     );
                     pokemons.add(pokemon);
                 }

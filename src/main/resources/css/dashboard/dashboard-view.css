@@ -171,3 +171,49 @@
     -fx-font-size: 13px;
     -fx-font-style: italic;
 }
+
+/* ===================================================
+    EQUIPO POKEMON
+   =================================================== */
+.pokemon-card {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-min-width: 110px;
+}
+
+.pokemon-card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.pokemon-card-type {
+    -fx-text-fill: #a0a0a0;
+    -fx-font-size: 11px;
+}
+
+.contenedor-imagen {
+  /* Mantiene los márgenes y dimensiones actuales */
+  width: 300px; /* Ajusta a tu tamaño actual */
+  height: 200px; /* Ajusta a tu tamaño actual */
+  margin: 20px; /* Tu margen actual */
+  
+  /* CLAVE: Recorta todo lo que sobresalga del contenedor */
+  overflow: hidden; 
+  position: relative;
+}
+
+.contenedor-imagen img {
+  width: 150%;
+  height: 125%;
+  object-fit: cover;
+  
+  /* CLAVE: Aumenta el tamaño un 75% (100% original + 75% = 175% -> 1.75) */
+  transform: scale(2.5);
+  
+  /* Opcional: Centra la ampliación */
+  transform-origin: center center; 
+}
