@@ -4,30 +4,44 @@ public class RegisterRequest {
     private String nickname;
     private String email;
     private String passwrd;
-    private int pokemons;
-    private int pokedex;
+    private String initialPokemon;
 
-    public RegisterRequest(String nickname, String email, String passwrd) {
+    public RegisterRequest(String nickname, String email, String passwrd, String initialPokemon) {
         this.nickname = nickname;
         this.email = email;
         this.passwrd = passwrd;
-        this.pokemons = 1;
-        this.pokedex = 1;
+        this.initialPokemon = initialPokemon;
     }
 
-    // Getters y Setters
-    public String getNickname() { return nickname; }
-    public void setNickname(String nickname) { this.nickname = nickname; }
+    public String getNickname() {
+        return nickname;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-    public String getPasswrd() { return passwrd; }
-    public void setPasswrd(String passwrd) { this.passwrd = passwrd; }
+    public String getEmail() {
+        return email;
+    }
 
-    public int getPokemons() { return pokemons; }
-    public void setPokemons(int pokemons) { this.pokemons = pokemons; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public int getPokedex() { return pokedex; }
-    public void setPokedex(int pokedex) { this.pokedex = pokedex; }
+    public String getPasswrd() {
+        return passwrd;
+    }
+
+    public void setPasswrd(String passwrd) {
+        this.passwrd = passwrd;
+    }
+
+    public String getInitialPokemon() {
+        return initialPokemon;
+    }
+
+    public void setInitialPokemon(String initialPokemon) {
+        this.initialPokemon = initialPokemon;
+    }
 }
