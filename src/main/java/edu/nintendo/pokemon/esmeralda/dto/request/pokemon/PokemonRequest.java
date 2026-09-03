@@ -1,4 +1,4 @@
-package main.java.nintendo.pokemon.esmeralda.dto.request.pokemon;
+package main.java.edu.nintendo.pokemon.esmeralda.dto.request.pokemon;
 
 public class PokemonRequest {
 

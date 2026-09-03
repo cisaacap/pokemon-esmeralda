@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -66,7 +67,6 @@
                             <children>
                                 <Label styleClass="section-title-label" text="Pokémones Actuales (Equipo)" />
                                 <HBox fx:id="hboxCurrentPokemons" alignment="CENTER" spacing="10.0" styleClass="sub-container" VBox.vgrow="ALWAYS">
-                                    <!-- Aquí puedes inyectar dinámicamente las tarjetas de los pokémones actuales -->
                                     <Label styleClass="placeholder-label" text="Cargando equipo Pokémon..." />
                                 </HBox>
                             </children>
@@ -75,10 +75,14 @@
                         <!-- SECCIÓN INFERIOR: Pokédex -->
                         <VBox spacing="8.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <Label styleClass="section-title-label" text="Registro Pokédex" />
+                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <children>
+                                        <Label styleClass="section-title-label" text="Registro Pokédex" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                        <Button fx:id="btnOpenPokedex" mnemonicParsing="false" onAction="#handlePokedexView" styleClass="pokedex-action-button" text="Ver Pokédex Completa" />
+                                    </children>
+                                </HBox>
                                 <AnchorPane fx:id="panePokedex" styleClass="sub-container" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <!-- Aquí puedes agregar un ListView, TableView o Grid para la Pokédex -->
                                         <Label layoutX="14.0" layoutY="14.0" styleClass="placeholder-label" text="Progreso y lista de Pokédex registrada..." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
                                     </children>
                                 </AnchorPane>

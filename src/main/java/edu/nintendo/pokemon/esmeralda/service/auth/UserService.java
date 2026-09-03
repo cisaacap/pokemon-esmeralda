@@ -1,9 +1,11 @@
 package main.java.edu.nintendo.pokemon.esmeralda.service.auth;
 
+import java.util.List;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.request.auth.LoginRequest;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.request.auth.RegisterRequest;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.response.auth.LoginResponse;
 import main.java.edu.nintendo.pokemon.esmeralda.dto.response.auth.RegisterResponse;
+import main.java.edu.nintendo.pokemon.esmeralda.dto.response.pokemon.UserPokemonResponse;
 import main.java.edu.nintendo.pokemon.esmeralda.repository.auth.UserRepository;
 
 public class UserService {
@@ -37,14 +39,14 @@ public class UserService {
         if (registerRequest == null) {
             return new RegisterResponse(false, "La petición no puede ser nula.");
         }
-        
+
         // Validar campos vacíos o nulos
         if (registerRequest.getNickname() == null || registerRequest.getNickname().trim().isEmpty()
                 || registerRequest.getEmail() == null || registerRequest.getEmail().trim().isEmpty()
                 || registerRequest.getPasswrd() == null || registerRequest.getPasswrd().trim().isEmpty()) {
             return new RegisterResponse(false, "Todos los campos son obligatorios.");
         }
-        
+
         // Validar que no contengan espacios
         if (registerRequest.getNickname().contains(" ")) {
             return new RegisterResponse(false, "El nickname no puede contener espacios.");
@@ -57,11 +59,15 @@ public class UserService {
         if (!registerRequest.getEmail().contains("@") || !registerRequest.getEmail().contains(".")) {
             return new RegisterResponse(false, "El formato del correo electrónico no es válido.");
         }
-        
+
         // Validar longitud de la contraseña
         if (registerRequest.getPasswrd().length() < 8) {
             return new RegisterResponse(false, "La contraseña debe tener al menos 8 caracteres.");
         }
         return userRepo.saveNewUser(registerRequest);
+    }
+
+    public List<UserPokemonResponse> getUserPokemons(String nickname) {
+        return userRepo.findUserPokemonsByNickname(nickname);
     }
 }
